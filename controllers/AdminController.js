@@ -1,12 +1,22 @@
-const IllustrationService = require('../services/IllustrationService');
+const illustrationService = require('../services/IllustrationService');
+const authService = require('../services/authService');
 
 class AdminController {
-    static getIllustrations(req, res) {
-        IllustrationService.getAll().then(result => {
+    getIllustrations(req, res) {
+        illustrationService.getAll().then(result => {
             res.json(result);
         });
         // return res.json('Hey there');
     }
+
+    login(req, res) {
+        const params = req.body;
+        authService.login(params).then(result => {
+            res.json(result);
+        })
+    }
 }
 
-module.exports = AdminController;
+const adminController = new AdminController();
+
+module.exports = adminController;

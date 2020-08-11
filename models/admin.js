@@ -2,7 +2,7 @@
 const {DataTypes, Model} = require('sequelize');
 const sequelize = require('../dbal/connectors/sequelize');
 
-class User extends Model {
+class Admin extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,8 +11,9 @@ class User extends Model {
     static associate(models) {
         // define association here
     }
-};
-User.init({
+}
+
+Admin.init({
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -21,17 +22,17 @@ User.init({
         },
         unique: true
     },
-    firstName: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    lastName: DataTypes.STRING,
-    phoneNumber: {
+    password: {
         type: DataTypes.STRING,
         allowNull: false,
     }
 }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Admin',
 });
-module.exports = User;
+
+module.exports = Admin;

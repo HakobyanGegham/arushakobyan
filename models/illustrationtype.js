@@ -1,32 +1,27 @@
 'use strict';
 const {DataTypes, Model} = require('sequelize');
 const sequelize = require('../dbal/connectors/sequelize');
+const Illustration = require('./illustration');
 
-class Role extends Model {
+class IllustrationType extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-        // define association here
+        this.hasMany(Illustration);
     }
 };
-Role.init({
-    name: {
+IllustrationType.init({
+    key: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            min: 2,
-            isAlpha: true
-        }
     },
-    accessLevel: {
-        type: DataTypes.INTEGER,
-    },
+    name: DataTypes.STRING
 }, {
     sequelize,
-    modelName: 'Role'
+    modelName: 'IllustrationType',
 });
 
-module.exports = Role;
+module.exports = IllustrationType;

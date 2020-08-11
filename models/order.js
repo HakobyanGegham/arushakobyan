@@ -1,41 +1,41 @@
 'use strict';
 const {DataTypes, Model} = require('sequelize');
 const sequelize = require('../dbal/connectors/sequelize');
-const IllustrationType = require('./illustrationtype');
-const IllustrationState = require('./illustrationstate');
+const User = require('./user');
+const OrderState = require('./orderstate');
+const Illustration = require('./illustration');
 
-class Illustration extends Model {
+class Order extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-        this.belongsTo(IllustrationType, {
-            foreignKey: 'typeId'
-        });
-        this.belongsTo(IllustrationState, {
+        this.belongsTo(User);
+        this.belongsTo(OrderState, {
             foreignKey: 'stateId'
         });
+        this.belongsTo(Illustration);
     }
-}
-Illustration.init({
-    name: {
-        type: DataTypes.STRING,
+};
+Order.init({
+    userId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
-    size: DataTypes.STRING,
     stateId: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    typeId: {
+    illustrationId: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
     sendDate: DataTypes.DATE
 }, {
     sequelize,
-    modelName: 'Illustration',
+    modelName: 'Order',
 });
-module.exports = Illustration;
+
+module.exports = Order;

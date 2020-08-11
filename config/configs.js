@@ -31,7 +31,7 @@ const {error, value: envVars} = envVarsSchema.validate(process.env);
 if (error) {
     throw new Error(`Config validation error: ${error.message}`)
 }
-const config = {
+const configs = {
     env: envVars.NODE_ENV,
     isProduction: envVars.NODE_ENV === 'production',
     isDevelopment: envVars.NODE_ENV === 'development',
@@ -48,6 +48,9 @@ const config = {
         password: envVars.DATABASE_PASSWORD,
         host: envVars.DATABASE_HOST,
         dialect: envVars.DATABASE_DIALECT
+    },
+    jwt: {
+        secretToken: envVars.SECRET_TOKEN
     }
 };
-module.exports = config;
+module.exports = configs;
