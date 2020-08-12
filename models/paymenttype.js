@@ -2,8 +2,9 @@
 const {DataTypes, Model} = require('sequelize');
 const sequelize = require('../dbal/connectors/sequelize');
 const Payment = require('./payment');
+const KeyModel = require('./keymodel');
 
-class PaymentType extends Model {
+class PaymentType extends KeyModel {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.

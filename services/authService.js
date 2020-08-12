@@ -1,23 +1,25 @@
 const config = require('../config/configs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const Admin = require('../models/admin');
 
 class AuthService {
     generateToken(email) {
-        return jwt.sign(email, config.jwt.secretToken, { expiresIn: '1800s' });
+        return jwt.sign({email}, config.jwt.secretToken, { expiresIn: '59m' });
     }
 
     async login(params) {
-        const user = await User.findOne({
+        const admin = await Admin.findOne({
             where: {
                 username: params.username,
                 password: params.password
             }
         });
 
-        if (user) {
-            return this.generateToken(user.email);
+        if (!admin) {
+            throw new Error('User not found');
         }
+
+        return this.generateToken(admin.email);
     }
 }
 

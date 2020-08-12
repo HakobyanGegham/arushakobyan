@@ -8,8 +8,6 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-const token = require('crypto').randomBytes(64).toString('hex');
-console.log(token);
 app.use('/admin', adminRoutes);
 
 const port = config.server.port;

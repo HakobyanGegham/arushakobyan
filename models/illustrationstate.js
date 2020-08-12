@@ -1,8 +1,9 @@
 const {DataTypes, Model} = require('sequelize');
 const sequelize = require('../dbal/connectors/sequelize');
 const Illustration = require('./illustration');
+const KeyModel = require('./keymodel');
 
-class IllustrationState extends Model {
+class IllustrationState extends KeyModel {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,7 +12,8 @@ class IllustrationState extends Model {
     static associate(models) {
         this.hasMany(Illustration);
     }
-};
+}
+
 IllustrationState.init({
     key: {
         type: DataTypes.STRING,
