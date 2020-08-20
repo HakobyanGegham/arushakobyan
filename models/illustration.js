@@ -3,6 +3,7 @@ const {DataTypes, Model} = require('sequelize');
 const sequelize = require('../dbal/connectors/sequelize');
 const IllustrationType = require('./illustrationtype');
 const IllustrationState = require('./illustrationstate');
+const IllustrationSize = require('./illustrationsize');
 
 class Illustration extends Model {
     /**
@@ -17,6 +18,9 @@ class Illustration extends Model {
         this.belongsTo(IllustrationState, {
             foreignKey: 'stateId'
         });
+        this.belongsTo(IllustrationSize, {
+            foreignKey: 'sizeId'
+        });
     }
 }
 Illustration.init({
@@ -24,7 +28,10 @@ Illustration.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    size: DataTypes.STRING,
+    sizeId:  {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     stateId: {
         type: DataTypes.INTEGER,
         allowNull: false,

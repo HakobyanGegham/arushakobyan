@@ -14,6 +14,8 @@ const envVarsSchema = joi.object({
         .required(),
     PORT: joi.number()
         .required(),
+    CRON_JOB_PORT: joi.number()
+        .required(),
     DATABASE_DIALECT: joi.string()
         .required(),
     LOGGER_LEVEL: joi.string()
@@ -24,7 +26,11 @@ const envVarsSchema = joi.object({
         .truthy('true')
         .falsy('FALSE')
         .falsy('false')
-        .default(true)
+        .default(true),
+    SENDER_EMAIL:joi.string()
+        .required(),
+    RECEIVER_EMAIL:joi.string()
+        .required(),
 }).unknown().required();
 
 const {error, value: envVars} = envVarsSchema.validate(process.env);
@@ -40,7 +46,8 @@ const configs = {
         enabled: envVars.LOGGER_ENABLED
     },
     server: {
-      port: envVars.PORT
+      port: envVars.PORT,
+        cronJobsPort: envVars.CRON_JOB_PORT
     },
     database: {
         name: envVars.DATABASE_NAME,
@@ -51,6 +58,10 @@ const configs = {
     },
     jwt: {
         secretToken: envVars.SECRET_TOKEN
+    },
+    email: {
+        senderEmail: envVars.SENDER_EMAIL,
+        receiverEmail: envVars.RECEIVER_EMAIL,
     }
 };
 module.exports = configs;

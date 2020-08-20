@@ -1,6 +1,7 @@
 function errorHandler(message, code, res) {
     res.status(code);
-    return res.json(message);
+    res.json(message);
+    res.end();
 }
 
 module.exports = errorHandler;

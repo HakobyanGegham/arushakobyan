@@ -1,7 +1,7 @@
 const {DataTypes, Model} = require('sequelize');
 const sequelize = require('../dbal/connectors/sequelize');
-const Illustration = require('./illustration');
-const KeyModel = require('./keymodel');
+const Illustration = require('../models/illustration');
+const KeyModel = require('../models/keymodel');
 
 class IllustrationState extends KeyModel {
     /**
